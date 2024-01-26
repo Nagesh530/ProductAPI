@@ -1,0 +1,9 @@
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.Extensions.Diagnostics.HealthChecks;
+global using Moq;
+global using NUnit.Framework;
+global using ProductWebAPI.Controllers;
+global using ProductWebAPI.DTOs;
+global using ProductWebAPI.Repositories;
+global using System.Collections.Generic;
+global using System.Threading.Tasks;
