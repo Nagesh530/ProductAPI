@@ -1,0 +1,25 @@
+trigger:
+- main
+pool:
+  vmImage: ubuntu-latest
+stages:
+  - stage: Testing
+    jobs:
+      - job: test
+        steps:
+          - script: echo testing application
+  - stage: Deploye_US1 #This stage runs after Test
+    jobs:
+      - job: deploye_us1
+        steps:
+          - script: echo deploying to us1
+  - stage: Deploye_US2
+    jobs:
+      - job : deploye_us2
+        steps:
+          - script: echo deploying to us2
+  - stage: DeployEurope # this stage run after the DeployeUS2
+    jobs:
+      - job: deploy_europe
+        steps:
+          - script: echo deploying to Europe       
