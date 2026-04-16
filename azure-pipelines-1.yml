@@ -4,21 +4,25 @@ pool:
   vmImage: ubuntu-latest
 stages:
   - stage: Testing
+    dependsOn: []
     jobs:
       - job: test
         steps:
           - script: echo testing application
   - stage: Deploye_US1 #This stage runs after Test
+    dependsOn: []
     jobs:
       - job: deploye_us1
         steps:
           - script: echo deploying to us1
   - stage: Deploye_US2
+    dependsOn: []
     jobs:
       - job : deploye_us2
         steps:
           - script: echo deploying to us2
   - stage: DeployEurope # this stage run after the DeployeUS2
+    dependsOn: []
     jobs:
       - job: deploy_europe
         steps:
