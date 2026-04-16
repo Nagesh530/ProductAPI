@@ -21,10 +21,11 @@ stages:
     - task : VSBuild@1
       displayName: "Build .NET Framework 4.8 Project"
       inputs :
-        solution: '**/*.sln'
-        msbuildArgs: '/p:Configuration=$(buildConfiguration)'
+        solution: '**/*.sln'        
+        msbuildArgs: '/p:Configuration=Release /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(Build.ArtifactStagingDirectory)\\"'
         platform: 'Any CPU'
         configuration: 'Release'
+               
     - task: PublishBuildArtifacts@1
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
