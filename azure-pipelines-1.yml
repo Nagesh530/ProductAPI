@@ -16,13 +16,13 @@ stages:
         steps:
           - script: echo deploying to us1
   - stage: Deploye_US2
-    dependsOn: []
+    dependsOn: [Testing,Deploye_US1]
     jobs:
       - job : deploye_us2
         steps:
           - script: echo deploying to us2
   - stage: DeployEurope # this stage run after the DeployeUS2
-    dependsOn: []
+    dependsOn: [Deploye_US2]
     jobs:
       - job: deploy_europe
         steps:
