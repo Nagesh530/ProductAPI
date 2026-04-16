@@ -14,8 +14,18 @@ stages:
   - job: BuildJob
     displayName: "Restore and Build"
     steps:
-    - task: DotNetCoreCLI@2
+    - task: NuGetCommand@2
       displayName: "Restore NuGet Packages"
-      inputs:
-        command: 'restore'
-        projects: '**/*.csproj'
+      inputs:        
+        restoreSolution: '**/*.sln'
+    - task : VSBuild@1
+      displayName: "Build .NET Framework 4.8 Project"
+      inputs :
+        solution: '**/*.sln'
+        msbuildArgs: '/p:Configuration=$(buildConfiguration)'
+        platform: 'Any CPU'
+        configuration: 'Release'
+        
+       
+
+
