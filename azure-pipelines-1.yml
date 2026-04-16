@@ -25,6 +25,15 @@ stages:
         msbuildArgs: '/p:Configuration=$(buildConfiguration)'
         platform: 'Any CPU'
         configuration: 'Release'
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
+        
+       
+        
+        
         
        
 
