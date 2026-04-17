@@ -22,15 +22,27 @@ stages:
       displayName: "Build .NET Framework 4.8 Project"
       inputs :
         solution: '**/*.sln'        
-        msbuildArgs: '/p:Configuration=Release /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(Build.ArtifactStagingDirectory)\\"'
+        msbuildArgs: >
+          /p:Configuration=Release
+          /p:DeployOnBuild=true
+          /p:WebPublishMethod=FileSystem
+          /p:publishUrl=$(Build.ArtifactStagingDirectory)
         platform: 'Any CPU'
         configuration: 'Release'
+    - task: ArchiveFiles@2
+      displayName: "ArchiveFiles@2"   
+      inputs:
+        rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
+        includeRootFolder: false
+        archiveType: "zip"
+        archiveFile: '$(Build.ArtifactStagingDirectory)/app.zip'
                
     - task: PublishBuildArtifacts@1
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
         ArtifactName: 'drop'
         publishLocation: 'Container'
+
 - stage: Deploy
   displayName: "Deploy to Azure app service"  
   dependsOn: Build
@@ -50,7 +62,7 @@ stages:
             azureSubscription: 'Dev-Azure-Connection'
             appName: 'app-csnmc-dev02-paymentapi'
             appType: webApp
-            package: '$(System.ArtifactsDirectory)/drop/**/*.zip'
+            package: '$(System.ArtifactsDirectory)/drop/app.zip'
           
        
         
