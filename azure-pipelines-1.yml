@@ -49,6 +49,7 @@ stages:
           inputs:
             azureSubscription: 'Dev-Azure-Connection'
             appName: 'app-csnmc-dev02-paymentapi'
+            appType: webApp
             package: '$(System.ArtifactsDirectory)/drop/**/*.zip'
           
        
