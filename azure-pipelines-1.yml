@@ -31,6 +31,27 @@ stages:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
         ArtifactName: 'drop'
         publishLocation: 'Container'
+- stage: Deploy
+  displayName: "Deploy to Azure app service"  
+  dependsOn: Build
+  jobs:
+    - job: Deployjob
+      steps:
+        - task: DownloadBuildArtifacts@0
+          displayName: "Downloading Build Artifacts"
+          inputs:
+            buildType: 'current'
+            downloadType: 'single'
+            artifactName: 'drop'
+            downloadPath: '$(System.ArtifactsDirectory)'
+        - task: AzureWebApp@1
+          displayName: "Deploy to Azure App Service"
+          inputs:
+            azureSubscription: ''
+            appName: ''
+            package: '$(System.ArtifactsDirectory)/drop/**/*.zip'
+          
+       
         
        
         
