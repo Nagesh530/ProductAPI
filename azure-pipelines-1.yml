@@ -47,8 +47,8 @@ stages:
         - task: AzureWebApp@1
           displayName: "Deploy to Azure App Service"
           inputs:
-            azureSubscription: ''
-            appName: ''
+            azureSubscription: 'Dev-Azure-Connection'
+            appName: 'app-csnmc-dev02-paymentapi'
             package: '$(System.ArtifactsDirectory)/drop/**/*.zip'
           
        
